@@ -1,7 +1,8 @@
+package ShoppingCart;
 
 import java.util.*;
 
-public class Main {
+public class Main {                
     private static GoodsInformation[] goodsincart =new GoodsInformation[100000];
     private static GoodsInformation[] goods =new GoodsInformation[100000];
     private static int index=0;
@@ -11,7 +12,6 @@ public class Main {
         int i=0,findGoods=0;
         if(goodsincart[id]!=null){
             while (i<=id) {
-                System.out.println(goodsincart[i].getId());
                 if(goodsincart[i].getId()==id){
                     int result=goodsincart[i].getInventory()-number;
                     if(result==0) {
@@ -41,7 +41,7 @@ public class Main {
     }
 
     public static void AddToCart(int inventory,int id){
-        int findGoods=0,k=0;        
+        int findGoods=0;        
         for(int i=0;i<1000;i++){
             if(goods[i]!=null&&goods[i].getId()==id){
                 findGoods=1;
@@ -50,14 +50,6 @@ public class Main {
                     break;
                 }
                 else{
-                    for(int j=0;j<index;j++){
-                        if(goodsincart[j]!=null&&goodsincart[j].getId()==id){
-                            goodsincart[j].setInventory(goodsincart[j].getInventory()+inventory);
-                            k=1;
-                        }
-                    }
-                }
-                if(k==0){
                     goodsincart[index]=new GoodsInformation();
                     goodsincart[index].setName(goods[i].getName());
                     goodsincart[index].setPrice(goods[i].getPrice());
@@ -106,20 +98,12 @@ public class Main {
         int id = input.nextInt();        
         double price = input.nextDouble();
         int inventory = input.nextInt();
-        int findGoods=0;
-        for(int j=0;j<index;j++){
-            if(goods[j]!=null&&goods[j].getId()==id){
-                goods[j].setInventory(goods[j].getInventory()+inventory);
-                findGoods=1;
-            }
-        }
-        if(findGoods==0){
-            goods[i]=new GoodsInformation();
-            goods[i].setName(name);
-            goods[i].setPrice(price);
-            goods[i].setInventory(inventory);
-            goods[i].setId(id);
-        }
+        goods[i]=new GoodsInformation();
+        goods[i].setName(name);
+        goods[i].setPrice(price);
+        goods[i].setInventory(inventory);
+        goods[i].setId(id); 
+
     }
     public static void DisplayGoodsShelves(){
         if(goods[0]==null){
